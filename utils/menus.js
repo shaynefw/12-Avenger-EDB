@@ -20,6 +20,21 @@ async function viewAllEmployees() {
   console.table(employees);
 }
 
+// View employees by manager
+async function viewEmployeesByManager() {
+    await sql.viewEmployeesByManager();
+}
+
+// View employees by department
+async function viewEmployeesByDepartment() {
+    await sql.viewEmployeesByDepartment();
+}
+
+// View department budget
+async function viewDepartmentBudget() {
+    await sql.viewDepartmentBudget();
+}
+
 // Add a department
 async function addDepartment() {
   await sql.addDepartment();
@@ -47,7 +62,7 @@ async function updateEmployeeManager() {
 
 // Delete department, role, or employee
 async function deleteDepRolEmp() {
-    await sql.deleteDepRolEmp();
+  await sql.deleteDepRolEmp();
 }
 
 // Prompt the user to select a menu option
@@ -88,9 +103,15 @@ async function menus() {
       break;
     case "View Employees by Manager":
       // Call the method to view employees by manager
+      await viewEmployeesByManager();
       break;
     case "View Employees by Department":
       // Call the method to view employees by department
+        await viewEmployeesByDepartment();
+      break;
+    case "View Total Department Budget":
+      // Call the method to view the total department budget
+      await viewDepartmentBudget();
       break;
     case "Add Department":
       // Call the method to add a department

@@ -16,6 +16,21 @@ class SQL {
     return await sqlDb.viewAllEmployees();
   }
 
+  // View all employees by manager
+  async viewEmployeesByManager(managerId) {
+    return await sqlDb.viewEmployeesByManager(managerId);
+  }
+
+  // View all employees by department
+  async viewEmployeesByDepartment(departmentId) {
+    return await sqlDb.viewEmployeesByDepartment(departmentId);
+  }
+
+  // View department total budget
+  async viewDepartmentBudget(departmentId) {
+    return await sqlDb.viewDepartmentBudget(departmentId);
+  }
+
   // Add a department
   async addDepartment(departmentName) {
     return await sqlDb.addDepartment(departmentName);
