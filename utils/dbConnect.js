@@ -242,7 +242,123 @@ class Database {
     console.log(`You have updated ${selectedEmployee}'s Manager to ${managerChoices.find((choice) => choice.value === managerToUpdate).name}`); // Display a message to the user
 
   } // End of updateEmployeeManager()
-  
+
+  // This method is used to delete a department, role, or employee
+  async deleteDepRolEmp() {
+    // Prompt the user to select a department, role, or employee
+    const response = await prompt([
+        {
+            name: "delete",
+            type: "list",
+            message: "From which of the following would you like to delete?",
+            choices: ["A Department", "A Role", "An Employee", "Return to Main Menu"]
+        }
+    ]) // End of prompt
+
+    // If the user selects department
+    if (response.delete === "A Department") {
+        // Get all the departments from the database
+        const [departmentRows] = await this.pool.execute("SELECT * FROM Departments");
+
+        // Create an array of objects with the department name and id
+        const departmentChoices = departmentRows.map((row) => ({
+            name: row.Department,
+            value: row.id
+        }));
+
+        // Prompt the user to select a department
+        const respondWith = await prompt([
+            {
+                name: "departmentToDelete",
+                type: "list",
+                message: "Which department would you like to delete?",
+                choices: [...departmentChoices, "Return to Main Menu"]
+            }
+        ]) // End of prompt
+
+        // If the user selects return to main menu
+        if (respondWith.departmentToDelete === "Return to Main Menu") {
+            return; // Return to the main menu
+        }
+        const {departmentToDelete} = respondWith; // Destructure the response
+
+        await this.pool.execute(`DELETE FROM Departments WHERE id = ?`, [departmentToDelete]); // Delete the department from the database
+
+        console.log(`You have deleted ${departmentChoices.find((choice) => choice.value === departmentToDelete).name} from the database.`); // Display a message to the user
+
+    } // End of department if statement
+
+    // If the user selects role
+    else if (response.delete === "A Role") {
+        // Get all the roles from the database
+        const [roleRows] = await this.pool.execute("SELECT * FROM Roles");
+
+        // Create an array of objects with the role title and id
+        const roleChoices = roleRows.map((row) => ({
+            name: row.Title,
+            value: row.id
+        }));
+
+        // Prompt the user to select a role
+        const respondWith = await prompt([
+            {
+                name: "roleToDelete",
+                type: "list",
+                message: "Which role would you like to delete?",
+                choices: [...roleChoices, "Return to Main Menu"]
+            }
+        ]) // End of prompt
+
+        // If the user selects return to main menu
+        if (respondWith.roleToDelete === "Return to Main Menu") {
+            return; // Return to the main menu
+        }
+
+        const {roleToDelete} = respondWith; // Destructure the response
+
+        await this.pool.execute(`DELETE FROM Roles WHERE id = ?`, [roleToDelete]); // Delete the role from the database
+
+        console.log(`You have deleted ${roleChoices.find((choice) => choice.value === roleToDelete).name} from the database.`); // Display a message to the user
+    }
+
+    // If the user selects employee
+    else if (response.delete === "An Employee") {
+        // Get all the employees from the database
+        const [employeeRows] = await this.pool.execute("SELECT * FROM Employees");
+
+        // Create an array of objects with the employee's first and last name and id
+        const employeeChoices = employeeRows.map((row) => ({
+            name: `${row.first_name} ${row.last_name}`,
+            value: row.id
+        }));
+
+        // Prompt the user to select an employee
+        const respondWith = await prompt([
+            {
+                name: "employeeToDelete",
+                type: "list",
+                message: "Which employee would you like to delete?",
+                choices: [...employeeChoices, "Return to Main Menu"]
+            }
+        ]) // End of prompt
+
+        // If the user selects return to main menu
+        if (respondWith.employeeToDelete === "Return to Main Menu") {
+            return; // Return to the main menu
+        }
+
+        const {employeeToDelete} = respondWith; // Destructure the response
+
+        await this.pool.execute(`DELETE FROM Employees WHERE id = ?`, [employeeToDelete]); // Delete the employee from the database
+
+        console.log(`You have deleted ${employeeChoices.find((choice) => choice.value === employeeToDelete).name} from the database.`); // Display a message to the user
+    }
+
+    // If the user selects return to main menu
+    else if (response.delete === "Return to Main Menu") {
+        return; // Return to the main menu
+    }
+  }
 
   async close() {
     await this.pool.end(); // Close the connection

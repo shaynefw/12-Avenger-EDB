@@ -45,6 +45,11 @@ async function updateEmployeeManager() {
   await sql.updateEmployeeManager();
 }
 
+// Delete department, role, or employee
+async function deleteDepRolEmp() {
+    await sql.deleteDepRolEmp();
+}
+
 // Prompt the user to select a menu option
 async function menus() {
   const { choice } = await prompt({
@@ -109,6 +114,7 @@ async function menus() {
       break;
     case "Delete Department, Role, or Employee":
       // Call the method to delete a department, role, or employee
+      await deleteDepRolEmp();
       break;
     case "Quit":
       console.log("Thank you for using the Avenger Employee Database.");

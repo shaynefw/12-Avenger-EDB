@@ -40,6 +40,11 @@ class SQL {
   async updateEmployeeManager(employeeId, managerId) {
     return await sqlDb.updateEmployeeManager(employeeId, managerId);
   }
+
+  // Delete department, role, or employee
+  async deleteDepRolEmp(departmentId, roleId, employeeId) {
+    return await sqlDb.deleteDepRolEmp(departmentId, roleId, employeeId);
+  }
 } // End of class SQL
 
 module.exports = SQL;
