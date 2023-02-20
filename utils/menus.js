@@ -10,14 +10,29 @@ async function viewAllDepartments() {
 
 // View all roles
 async function viewAllRoles() {
-    const roles = await sql.viewAllRoles();
-    console.table(roles);
+  const roles = await sql.viewAllRoles();
+  console.table(roles);
 }
 
 // View all employees
 async function viewAllEmployees() {
-    const employees = await sql.viewAllEmployees();
-    console.table(employees);
+  const employees = await sql.viewAllEmployees();
+  console.table(employees);
+}
+
+// Add a department
+async function addDepartment() {
+  await sql.addDepartment();
+}
+
+// Add a role
+async function addRole() {
+  await sql.addRole();
+}
+
+// Add an employee
+async function addEmployee() {
+    await sql.addEmployee();
 }
 
 // Prompt the user to select a menu option
@@ -53,12 +68,15 @@ async function menus() {
       break;
     case "Add Department":
       // Call the method to add a department
+      await addDepartment();
       break;
     case "Add Role":
       // Call the method to add a role
+      await addRole();
       break;
     case "Add Employee":
       // Call the method to add an employee
+        await addEmployee();
       break;
     case "Update Employee Role":
       // Call the method to update an employee's role
