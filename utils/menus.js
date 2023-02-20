@@ -32,7 +32,17 @@ async function addRole() {
 
 // Add an employee
 async function addEmployee() {
-    await sql.addEmployee();
+  await sql.addEmployee();
+}
+
+// Update an employee's role
+async function updateEmployeeRole() {
+  await sql.updateEmployeeRole();
+}
+
+// Update an employee's manager
+async function updateEmployeeManager() {
+  await sql.updateEmployeeManager();
 }
 
 // Prompt the user to select a menu option
@@ -45,10 +55,15 @@ async function menus() {
       "View All Departments",
       "View All Roles",
       "View All Employees",
+      "View Employees by Manager",
+      "View Employees by Department",
+      "View Total Department Budget",
       "Add Department",
       "Add Role",
       "Add Employee",
       "Update Employee Role",
+      "Update Employee Manager",
+      "Delete Department, Role, or Employee",
       "Quit",
     ],
   });
@@ -66,6 +81,12 @@ async function menus() {
       // Call the method to view all employees
       await viewAllEmployees();
       break;
+    case "View Employees by Manager":
+      // Call the method to view employees by manager
+      break;
+    case "View Employees by Department":
+      // Call the method to view employees by department
+      break;
     case "Add Department":
       // Call the method to add a department
       await addDepartment();
@@ -76,10 +97,18 @@ async function menus() {
       break;
     case "Add Employee":
       // Call the method to add an employee
-        await addEmployee();
+      await addEmployee();
       break;
     case "Update Employee Role":
       // Call the method to update an employee's role
+      await updateEmployeeRole();
+      break;
+    case "Update Employee Manager":
+      // Call the method to update an employee's manager
+      await updateEmployeeManager();
+      break;
+    case "Delete Department, Role, or Employee":
+      // Call the method to delete a department, role, or employee
       break;
     case "Quit":
       console.log("Thank you for using the Avenger Employee Database.");

@@ -30,6 +30,16 @@ class SQL {
   async addEmployee(firstName, lastName, roleId, managerId) {
     return await sqlDb.addEmployee(firstName, lastName, roleId, managerId);
   }
+
+  // Update an employee's role
+  async updateEmployeeRole(employeeId, roleId) {
+    return await sqlDb.updateEmployeeRole(employeeId, roleId);
+  }
+
+  // Update an employee's manager
+  async updateEmployeeManager(employeeId, managerId) {
+    return await sqlDb.updateEmployeeManager(employeeId, managerId);
+  }
 } // End of class SQL
 
 module.exports = SQL;
