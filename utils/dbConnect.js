@@ -43,6 +43,123 @@ class Database {
     console.log(cTable.getTable(rows));
   }
 
+  // This method is used to view employees by manager by selecting a manager
+  async viewEmployeesByManager() {
+    // Get all the managers from the database
+    const [managerRows] = await this.pool.execute("SELECT * FROM Employees WHERE manager_id IS NULL");
+
+    // Create an array of objects with the manager name and id
+    const managerChoices = managerRows.map((row) => ({
+        name: `${row.first_name} ${row.last_name}`,
+        value: row.id
+    }));
+
+    // Prompt the user to select a manager
+    const respondWith = await prompt({
+        name: "manager",
+        type: "list",
+        message: "Which manager would you like to view?",
+        choices: managerChoices
+    })
+
+    // Get the manager id from the response
+    const managerId = respondWith.manager;
+
+    // Get all the employees from the database under the selected manager
+    const [rows] = await this.pool.execute(`
+        SELECT emp.id, 
+        emp.first_name, 
+        emp.last_name, 
+        role.Title,
+        dept.Department, 
+        role.Salary, 
+        CONCAT(mgr.first_name, ' ', mgr.last_name)
+        as Manager
+        FROM Employees emp
+        JOIN Roles role on emp.role_id = role.id
+        JOIN Departments dept on role.department_id = dept.id
+        LEFT JOIN Employees mgr on emp.manager_id = mgr.id
+        WHERE emp.manager_id = ?
+        `, [managerId]);
+    rows.forEach(row => row.Manager ||= ' ')    
+    console.log(cTable.getTable(rows));
+  }
+
+  // This method is used to view employees by department by selecting a department
+  async viewEmployeesByDepartment() {
+    // Get all the departments from the database
+    const [departmentRows] = await this.pool.execute("SELECT * FROM Departments");
+
+    // Create an array of objects with the department name and id
+    const departmentChoices = departmentRows.map((row) => ({
+        name: row.Department,
+        value: row.id
+    }));
+
+    // Prompt the user to select a department
+    const respondWith = await prompt({
+        name: "department",
+        type: "list",
+        message: "Which department would you like to view?",
+        choices: departmentChoices
+    })
+
+    // Get the department id from the response
+    const departmentId = respondWith.department;
+
+    // Get all the employees from the database under the selected department
+    const [rows] = await this.pool.execute(`
+        SELECT emp.id, 
+        emp.first_name, 
+        emp.last_name, 
+        role.Title,
+        dept.Department, 
+        role.Salary, 
+        CONCAT(mgr.first_name, ' ', mgr.last_name)
+        as Manager
+        FROM Employees emp
+        JOIN Roles role on emp.role_id = role.id
+        JOIN Departments dept on role.department_id = dept.id
+        LEFT JOIN Employees mgr on emp.manager_id = mgr.id
+        WHERE dept.id = ?
+        `, [departmentId]);
+    rows.forEach(row => row.Manager ||= ' ')    
+    console.log(cTable.getTable(rows));
+  }
+
+  // This method is used to view the total utilized budget of a department
+  async viewDepartmentBudget() {
+    // Get all the departments from the database
+    const [departmentRows] = await this.pool.execute("SELECT * FROM Departments");
+
+    // Create an array of objects with the department name and id
+    const departmentChoices = departmentRows.map((row) => ({
+        name: row.Department,
+        value: row.id
+    }));
+
+    // Prompt the user to select a department
+    const respondWith = await prompt({
+        name: "department",
+        type: "list",
+        message: "Which department would you like to view?",
+        choices: departmentChoices
+    })
+
+    // Get the department id from the response
+    const departmentId = respondWith.department;
+
+    // Get the total utilized budget of the selected department
+    const [rows] = await this.pool.execute(`
+        SELECT SUM(role.Salary) as "Total Utilized Budget"
+        FROM Employees emp
+        JOIN Roles role on emp.role_id = role.id
+        JOIN Departments dept on role.department_id = dept.id
+        WHERE dept.id = ?
+        `, [departmentId]);
+    console.log(cTable.getTable(rows));
+  }
+
   // This method is used to add a department
   async addDepartment() {
     const respondWith = await prompt(
