@@ -151,6 +151,99 @@ class Database {
     
   } // End of addEmployee()
 
+  // This method is used to update an employee's role
+  async updateEmployeeRole() {
+    // Get all the employees from the database
+    const [employeeRows] = await this.pool.execute("SELECT * FROM Employees");
+
+    // Get all the roles from the database
+    const [roleRows] = await this.pool.execute("SELECT * FROM Roles");
+
+    // Create an array of objects with the employee's first and last name and id
+    const employeeChoices = employeeRows.map((row) => ({
+        name: `${row.first_name} ${row.last_name}`,
+        value: row.id
+    }));
+
+    // Create an array of objects with the role title and id
+    const roleChoices = roleRows.map((row) => ({
+        name: row.Title,
+        value: row.id
+    }));
+
+    // Prompt the user to select an employee and role
+    const respondWith = await prompt([
+        {
+            name: "employeeToUpdate",
+            type: "list",
+            message: "Which employee would you like to update?",
+            choices: employeeChoices
+        },
+        {
+            name: "roleToUpdate",
+            type: "list",
+            message: "What is the new role of the employee?",
+            choices: roleChoices
+        }
+    ]) // End of prompt
+
+    const selectedEmployee = employeeChoices.find((employee) => employee.value === respondWith.employeeToUpdate).name; // Get the name of the employee selected
+
+    const {employeeToUpdate, roleToUpdate} = respondWith; // Destructure the response
+
+    await this.pool.execute(`UPDATE Employees SET role_id = ? WHERE id = ?`, [roleToUpdate, employeeToUpdate]); // Update the employee's role in the database
+
+    console.log(`You have updated ${selectedEmployee}'s Role to ${roleChoices.find((choice) => choice.value === roleToUpdate).name}`); // Display a message to the user
+
+  } // End of updateEmployeeRole()
+
+  // This method is used to update an employee's manager
+  async updateEmployeeManager() {
+    // Get all the employees from the database
+    const [employeeRows] = await this.pool.execute("SELECT * FROM Employees");
+
+    // Get all the managers from the database
+    const [managerRows] = await this.pool.execute("SELECT * FROM Employees WHERE manager_id IS NULL")
+
+    // Create an array of objects with the employee's first and last name and id
+    const employeeChoices = employeeRows.map((row) => ({
+        name: `${row.first_name} ${row.last_name}`,
+        value: row.id
+    }));
+
+    // Create an array of objects with the managers first and last name and id
+    const managerChoices = managerRows.map((row) => ({
+        name: `${row.first_name} ${row.last_name}`,
+        value: row.id
+    }));
+
+    // Prompt the user to select an employee and manager
+    const respondWith = await prompt([
+        {
+            name: "employeeToUpdate",
+            type: "list",
+            message: "Which employee would you like to update?",
+            choices: employeeChoices
+        },
+        {
+            name: "managerToUpdate",
+            type: "list",
+            message: "Who is the new manager of the employee?",
+            choices: managerChoices
+        }
+    ]) // End of prompt
+
+    const selectedEmployee = employeeChoices.find((employee) => employee.value === respondWith.employeeToUpdate).name; // Get the name of the employee selected
+
+    const {employeeToUpdate, managerToUpdate} = respondWith; // Destructure the response
+
+    await this.pool.execute(`UPDATE Employees SET manager_id = ? WHERE id = ?`, [managerToUpdate, employeeToUpdate]); // Update the employee's manager in the database
+
+    console.log(`You have updated ${selectedEmployee}'s Manager to ${managerChoices.find((choice) => choice.value === managerToUpdate).name}`); // Display a message to the user
+
+  } // End of updateEmployeeManager()
+  
+
   async close() {
     await this.pool.end(); // Close the connection
   }
