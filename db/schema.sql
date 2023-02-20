@@ -6,15 +6,15 @@ USE avenger_db;
 -- department table
 CREATE TABLE Departments (
     id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(30) NOT NULL,
+    Department VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
 );
 
 -- role table
 CREATE TABLE Roles (
     id INT NOT NULL AUTO_INCREMENT,
-    title VARCHAR(30) NOT NULL,
-    salary DECIMAL NOT NULL,
+    Title VARCHAR(30) NOT NULL,
+    Salary DECIMAL NOT NULL,
     department_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (department_id) 
@@ -35,5 +35,4 @@ CREATE TABLE Employees (
     REFERENCES Employees(id)
 );
 
-source db/seeds.sql;
-source db/query.sql;
+source db/seeds.sql; -- insert departments, roles, employees
