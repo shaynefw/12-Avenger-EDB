@@ -15,18 +15,41 @@ The Avenger Employee Database (EDB) is a command-line application that helps to 
 
 - [Project repo](https://github.com/shaynefw/12-Avenger-EDB)
 - [Project deployed link](https://shaynefw.github.io/12-Avenger-EDB/)
-
-## Usage
+- [Project Video Demo](https://drive.google.com/file/d/1OfQg3CRzsNXprMWpL54LP8hOMfWIBtVe/view?usp=sharing)
 
 1. Make sure you have Node.js and npm installed on your computer. If you don't, you can download them from the official Node.js website: **[https://nodejs.org/en/download/](https://nodejs.org/en/download/)**.
-2. Download or clone the project repository from GitHub: **[https://github.com/shaynefw/12-Avenger-EDB](https://github.com/shaynefw/12-Avenger-EDB)**.
+2. Download or clone the project repository from GitHub above.
 3. Open your terminal or command prompt and navigate to the project directory.
 4. Look inside the package.json to see what dependencies to install.
 5. Use npm install.
 
-![screenShot]()
+## Usage
+
+1. Start the app by running the node index.js command in your terminal.
+
+2. You will be presented with a menu of options to choose from. Use the arrow keys to navigate and hit Enter to select an option.
+
+3. To view a list of all employees, departments, or roles, select the "View all employees/departments/roles" option.
+
+4. To add a new employee, department, or role, select the "Add employee/department/role" option and follow the prompts.
+
+5. To update an employee's role or manager, select the "Update employee role/manager" option and follow the prompts.
+
+6. To delete an employee, department, or role, select the "Delete employee/department/role" option and follow the prompts.
+
+7. To search for employees by department, select the "Search employees by department" option and follow the prompts.
+
+8. To search for employees by manager, select the "Search employees by manager" option and follow the prompts.
+
+9. To see the total utilized budget of a department, select the "View department budget" option and follow the prompts.
+
+10. To exit the app, select the "Exit" option.
+
+![screenShot](./assets/images/12-Avenger-EDB.gif)
 
 ## Credits
+
+Prof, instructors, classmates, google, docs
 
 ## Licence
 
@@ -54,15 +77,32 @@ SOFTWARE.
 
 ## Badges
 
-![HTML](https://img.shields.io/badge/HTML-NUMBER%25-orange)
-![CSS](https://img.shields.io/badge/CSS-NUMBER%25-blue)
-![JavaScript](https://img.shields.io/badge/JavaScript-NUMBER%25-yellow)
+![JavaScript](https://img.shields.io/badge/JavaScript-100%25-yellow)
 
 ## Features
 
+The features of this application are:
+- View all employees
+- View employees by department
+- View employees by manager
+- Add an employee
+- Update an employee's role
+- Update an employee's manager
+- View all roles
+- Add a role
+- View all departments
+- Add a department
+- View the total utilized budget of a department
+- Delete a department
+- Delete a role
+- Delete an employee
 ## How to Contribute
 
+N/A
+
 ## Tests
+
+N/A
 
 ## Questions
 
