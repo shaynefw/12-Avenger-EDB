@@ -8,16 +8,16 @@ VALUES ('Medical'),
 
 -- insert roles
 INSERT INTO Roles (Title, Salary, department_id)
-VALUES ('Doctor', 80000, 1), 
-('Lead Doctor', 90000, 1), 
-('Engineer', 60000, 2),
-('Lead Engineer', 70000, 2), 
-('Scientist', 50000, 3),
-('Lead Scientist', 60000, 3), 
-('Security', 40000, 4),
-('Lead Security', 50000, 4), 
-('Intelligence', 30000, 5),
-('Lead Intelligence', 40000, 5);
+VALUES ('Doctor', 250000, 1), 
+('Lead Doctor', 400000, 1), 
+('Engineer', 105000, 2),
+('Lead Engineer', 140000, 2), 
+('Scientist', 85000, 3),
+('Lead Scientist', 125000, 3), 
+('Security', 80000, 4),
+('Lead Security', 95000, 4), 
+('Intelligence', 100000, 5),
+('Lead Intelligence', 156000, 5);
 
 -- insert employees
 ALTER TABLE Employees AUTO_INCREMENT = 1; -- why does auto_increment not start at 1?
