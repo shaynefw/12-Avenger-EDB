@@ -138,7 +138,7 @@ async function menus() {
       await deleteDepRolEmp();
       break;
     case "Quit":
-      console.log("Thank you for using the Avenger Employee Database.");
+      console.log("\x1b[34m%s\x1b[0m","Thank you for using the Avenger Employee Database.");
       process.exit(0); // Exit the application
   }
 

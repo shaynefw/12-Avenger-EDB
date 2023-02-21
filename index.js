@@ -1,6 +1,6 @@
 const menus = require('./utils/menus');
 
-console.log(`                                                            
+console.log("\x1b[34m%s\x1b[0m",`                                                            
                                                             
                                                             
                                     @&@@@@                  
@@ -25,7 +25,7 @@ console.log(`
                                                            
                                                             
 `);
-console.log(`
+console.log("\x1b[31m%s\x1b[0m",`
 █████╗ ██╗   ██╗███████╗███╗   ██╗ ██████╗ ███████╗██████╗ ███████╗    ███████╗██████╗ ██████╗ 
 ██╔══██╗██║   ██║██╔════╝████╗  ██║██╔════╝ ██╔════╝██╔══██╗██╔════╝    ██╔════╝██╔══██╗██╔══██╗
 ███████║██║   ██║█████╗  ██╔██╗ ██║██║  ███╗█████╗  ██████╔╝███████╗    █████╗  ██║  ██║██████╔╝
@@ -34,6 +34,6 @@ console.log(`
 ╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝    ╚══════╝╚═════╝ ╚═════╝ 
                                                                                                
 `)
-console.log('Welcome to the Avenger Employee Database.');
+console.log("\x1b[34m%s\x1b[0m",'Welcome to the Avenger Employee Database.');
 
 menus(); // Call the menus function to prompt the user
