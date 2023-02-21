@@ -186,7 +186,7 @@ class Database {
     await this.pool.execute("INSERT INTO Departments (Department) VALUES (?)", [
       departmentName,
     ]);
-    console.log(`You have added ${departmentName} to the database.`);
+    console.log(`\x1b[32m%s\x1b[0m`,`You have added ${departmentName} to the database.`);
   }
 
   // This method is used to add a role
@@ -229,7 +229,7 @@ class Database {
       [nameOfRole, salaryOfRole, departmentOfRole]
     ); // Add the role to the database
 
-    console.log(`You have added ${nameOfRole} to the database.`); // Display a message to the user
+    console.log(`\x1b[32m%s\x1b[0m`,`You have added ${nameOfRole} to the database.`); // Display a message to the user
   } // End of addRole()
 
   // This method is used to add an employee
@@ -289,7 +289,7 @@ class Database {
       [firstName, lastName, roleOfEmployee, managerOfEmployee]
     ); // Add the employee to the database
 
-    console.log(`You have added ${firstName} ${lastName} to the database.`); // Display a message to the user
+    console.log(`\x1b[32m%s\x1b[0m`,`You have added ${firstName} ${lastName} to the database.`); // Display a message to the user
   } // End of addEmployee()
 
   // This method is used to update an employee's role
@@ -340,6 +340,7 @@ class Database {
     ]); // Update the employee's role in the database
 
     console.log(
+        `\x1b[32m%s\x1b[0m`,
       `You have updated ${selectedEmployee}'s Role to ${
         roleChoices.find((choice) => choice.value === roleToUpdate).name
       }`
